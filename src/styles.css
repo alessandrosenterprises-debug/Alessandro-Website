@@ -1,7 +1,7 @@
 :root{
-  --brand-primary: #0b1f3a; /* deep navy from logo */
-  --brand-accent: #f6b63a;  /* warm gold */
-  --brand-accent-2: #2e7ab8; /* bright blue accent */
+  --brand-primary: #0b1f3a;
+  --brand-accent: #f6b63a;
+  --brand-accent-2: #2e7ab8;
   --bg: #f4f7fb;
   --surface: #ffffff;
   --text: #102440;
@@ -21,32 +21,72 @@
 .animated-section.in-view{ opacity:1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce){ .animated-section{ transition:none !important; transform:none !important; } }
 
+/* Base layout & tokens */
+*{ box-sizing: border-box; }
+html,body,#root{ height:100%; }
+body{ margin:0; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+main{ max-width:1100px; margin:28px auto; padding:18px; }
+.container{ padding: 0 18px; }
+.card{ background:var(--surface); border-radius:var(--radius-md); padding:16px; box-shadow:var(--shadow-sm); }
+
+/* Header & navigation */
+.site-header{ position:sticky; top:0; z-index:60; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 20px; background: rgba(255,255,255,0.6); backdrop-filter: blur(6px); box-shadow: 0 2px 8px rgba(16,36,64,0.04); }
+.header-left{ display:flex; align-items:center; gap:12px; }
+.header-logo{ height:48px; display:block; }
+.site-nav{ display:flex; gap:12px; align-items:center; }
+.site-nav a{ color:var(--text); padding:8px 10px; border-radius:10px; text-decoration:none; transition: all var(--speed-fast) ease; }
+.site-nav a:hover{ background: rgba(46,122,184,0.08); color:var(--brand-accent-2); transform: translateY(-2px); }
+.site-actions{ display:flex; gap:8px; align-items:center; }
+
+/* Hero */
+.hero{ display:flex; align-items:center; gap:24px; padding:36px 24px; border-radius:16px; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.44)); box-shadow:var(--shadow-md); }
+.hero .eyebrow{ color:var(--brand-accent-2); letter-spacing:1px; font-weight:600; margin:0 0 6px 0; }
+.hero h1{ font-size:2.4rem; margin:6px 0; line-height:1.08; }
+.hero em{ color:var(--brand-accent); font-style:normal; }
+.hero p{ margin:8px 0; }
+
+/* Catalogue / grids */
+.catalogue-section{ margin-top:28px; }
+.catalogue-grid{ display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.catalogue-card{ background:var(--surface); border-radius:12px; overflow:hidden; box-shadow:var(--shadow-sm); transition: transform var(--speed-medium) ease, box-shadow var(--speed-medium) ease; }
+.catalogue-card:hover{ transform: translateY(-6px); box-shadow:var(--shadow-md); }
+.catalogue-card img{ width:100%; height:180px; object-fit:cover; display:block; }
+.catalogue-card .card-body{ padding:12px; }
+
+/* Updates / content cards */
+.update-grid{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.content-card img, .gallery-image img{ width:100%; height:auto; object-fit:cover; }
+
+/* Footer */
+footer.site-footer{ margin-top:48px; padding:28px 20px; background: linear-gradient(180deg, rgba(11,31,58,0.02), rgba(255,255,255,0.02)); border-radius:12px; }
+footer .footer-inner{ display:flex; gap:20px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+
 /* Buttons */
 .btn{ display:inline-block; background: linear-gradient(90deg, var(--brand-accent), var(--brand-accent-2)); color:#082033; padding:10px 14px; border-radius:var(--radius-sm); border:none; cursor:pointer; transition: transform var(--speed-medium) ease, box-shadow var(--speed-medium) ease; box-shadow:var(--shadow-sm); text-decoration:none; }
 .btn:hover{ transform: translateY(-3px); box-shadow:var(--shadow-md); }
 
-/* Base page tokens */
-*{ box-sizing: border-box; }
-body{ margin:0; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-main{ max-width:1100px; margin:28px auto; padding:18px; }
-.header-logo{ height:48px; }
-.card{ background:var(--surface); border-radius:var(--radius-md); padding:16px; box-shadow:var(--shadow-sm); }
+/* Responsive rules */
+@media (max-width: 900px){
+  main{ margin:16px auto; padding:12px; }
+  .hero{ flex-direction:column; text-align:left; padding:22px; }
+  .hero h1{ font-size:1.8rem; }
+  .header-logo{ height:42px; }
+  .catalogue-grid{ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .catalogue-card img{ height:160px; }
+}
 
-/* Improved hero visuals */
-.hero{ display:flex; align-items:center; gap:24px; padding:36px 24px; border-radius:16px; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.44)); box-shadow:var(--shadow-md); }
-.hero .eyebrow{ color:var(--brand-accent-2); letter-spacing:1px; font-weight:600; }
-.hero h1{ font-size:2.4rem; margin:6px 0; }
-.hero em{ color:var(--brand-accent); font-style:normal; }
+@media (max-width: 600px){
+  .site-nav{ display:none; }
+  .site-actions{ gap:6px; }
+  .hero{ padding:18px; }
+  .hero h1{ font-size:1.5rem; }
+  .btn{ width:100%; display:block; text-align:center; }
+  .header-logo{ height:38px; }
+  .catalogue-card img{ height:140px; }
+  footer .footer-inner{ flex-direction:column; align-items:stretch; }
+}
 
-/* Make images feel nicer */
-.catalogue-grid img, .update-grid img, .gallery-image img, .content-card img{ width:100%; height:auto; object-fit:cover; border-radius:8px; }
-
-/* Keep original site corrections and rules (preserved) */
-:root{font-family:Inter,system-ui,sans-serif;color:#102440;background:#f4f7fb}
-*{box-sizing:border-box}body{margin:0}.site-header{position:sticky;top:0;z-index:30;display:flex;align-items:center;jus[...]
-/* Image and layout corrections: fill the available card area without cropping. */
-.site-header { width: 100%; }
-.hero { max-width: none; width: 100%; }
+/* Preserve older corrections from original stylesheet (safeguard) */
 .update-grid img, .catalogue-grid img, .content-card img, .gallery-image img { object-fit: fill; }
 .update-grid article > img, .catalogue-grid article > img { min-height: 260px; }
 .content-card > img { width: 100%; height: 100%; min-height: 300px; object-fit: fill; }
