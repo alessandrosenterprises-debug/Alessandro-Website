@@ -19,7 +19,7 @@ function Header({ go }) {
   return (
     <header className="site-header">
       <div className="header-left">
-        <img className="header-logo" src="/public/alessandro-enterprises-logo.png" alt="Alessandro Enterprises" />
+        <img className="header-logo" src="/alessandro-enterprises-logo.png" alt="Alessandro Enterprises" />
       </div>
       <nav className="site-nav" aria-label="Main navigation">
         <a href="#" onClick={(e) => { e.preventDefault(); go('/'); }}>Home</a>
